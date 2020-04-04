@@ -1,11 +1,8 @@
 import pandas as pd
 from datetime import datetime
-import matplotlib
+from matplotlib import pyplot as plt
 import selfAnalyserUtil
 
-dataframe = pd.read_csv("tables/time_sheet.csv")
-
-print("Self Analyser")
 
 def fill24Hours(categories):
     try:
@@ -22,7 +19,7 @@ def fill24Hours(categories):
                 isNewDate = True
         if isNewDate:
             bedTime = selfAnalyserUtil.formatTime(input("Enter the time you went to bed yesterday (in 11:00P.M. format) : "))
-            dataframe['time to bed'].loc[dataframe.shape[0]-1]  = bedTime
+            dataframe.at[dataframe.shape[0]-1 , 'time to bed']  = bedTime
             wakeUpTime = selfAnalyserUtil.formatTime(input("Enter the time you woke up today (in 6:00A.M. format) : "))
             loggedCategories['sleep'] = selfAnalyserUtil.getTimeDifferenceInhours(bedTime, wakeUpTime)
             print(loggedCategories['sleep'])
@@ -59,19 +56,57 @@ def fill24Hours(categories):
         raise error
 
 if __name__ == "__main__":
-    userInput = int(input(("""
-    ###################################
-    1.Log time sheet
-    2.View Statistics
-    Enter your choice: """)))
+    
+    dataframe = pd.read_csv("tables/time_sheet_master.csv")
 
-    if userInput == 1:
-        categories = dataframe.columns
-        loggedCategories = fill24Hours(categories)
-        if bool(loggedCategories):
-            dataframe = dataframe.append(loggedCategories,ignore_index=True)
+    categories = dataframe.columns
+    while True:
+        userInput = int(input(("""
+        Self Analyser
+        ###################################
+        1.Log time sheet
+        2.View Statistics
+        3.Quit
+        Enter your choice: """)))
 
-    print(dataframe.head())
+        if userInput == 1:
+            
+            loggedCategories = fill24Hours(categories)
+            if bool(loggedCategories):
+                dataframe = dataframe.append(loggedCategories,ignore_index=True)
 
-    dataframe.to_csv("tables/time_sheet.csv",index = False)
+            print(dataframe.head())
+            
+            dataframe.to_csv("tables/time_sheet.csv",index = False)
+
+        if userInput == 2:
+            userChoice = input("""
+            1. Time spent on each day in particular category
+            2. Time spent on last logged day in each category
+            """)
+            if userChoice == "1":
+                [print("{} {}".format(ind+1,val)) for ind,val in enumerate(categories[3:-1])]
+                select = int(input("Select the category!!"))
+                currentCategory = categories[select+2]
+                plt.bar(dataframe.date,dataframe[currentCategory])
+                plt.xlabel("date")
+                plt.ylabel("time spent on learing in hours")
+                plt.title("Time spent on learning each day")
+                plt.show()
+            elif userChoice == "2":
+                pieChart = dataframe.tail(1)
+                pieChart.is_copy = False
+                pieChart.dropna(axis='columns',inplace=True)
+                labels = pieChart.columns[2:]
+                sizes = pieChart.values[-1].tolist()[2:]
+                fig1, ax1 = plt.subplots()
+                ax1.pie(sizes, labels=labels,autopct='%1.1f%%',shadow=True, startangle=90)
+                ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+                plt.title(dataframe.date.iloc[dataframe.shape[0]-1])
+                plt.show()
+        if userInput == 3:
+            print("See you soon.Byee!!")
+            break
+
+
     
