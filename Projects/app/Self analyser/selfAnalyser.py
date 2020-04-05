@@ -228,9 +228,9 @@ if __name__ == "__main__":
             2. Time spent on last logged day in each category
             """)
             if userChoice == "1":
-                [print("{} {}".format(ind+1,val)) for ind,val in enumerate(categories[3:-1])]
+                [print("{} {}".format(ind+1,val)) for ind,val in enumerate(categories[2:-1])]
                 select = int(input("Select the category!!"))
-                currentCategory = categories[select+2]
+                currentCategory = categories[select+1]
                 plt.bar(dataframe.date,dataframe[currentCategory])
                 plt.xlabel("date")
                 plt.ylabel("time spent on learing in hours")
