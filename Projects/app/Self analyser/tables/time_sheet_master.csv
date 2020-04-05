@@ -1,4 +1,6 @@
-date,wakeup time,sleep,meditation,exercise,daily routines,travel to work,work,learning,movies,series,games,outing,others,time to bed
-2020-04-01,9:00A.M.,8,,,1,,9,5,,,,,1,12:00A.M.
-2020-04-02,9:00A.M.,8,,,1,,9,6,,,,,,12:15A.M.
-2020-04-03,7:05A.M.,6.83,,,2,,10,5,,,,,0.17,
+date,wakeup time,sleep,meditation,exercise,daily routines,travel to work,work,learning,movies,series,games,social media,outing,others,time to bed
+2020-04-01,9:00A.M.,8.0,,,1.0,,9.0,5.0,,,,,,1.0,12:00A.M.
+2020-04-02,9:00A.M.,8.0,,,1.0,,9.0,6.0,,,,,,,12:15A.M.
+2020-04-03,7:05A.M.,6.83,,,2.0,,10.0,5.0,,,,,,0.17,12:15A.M.
+2020-04-04,10:00A.M.,9.75,,,2.0,,,6.0,,,,3.0,,3.25,12:30A.M.
+2020-04-05,10:15A.M.,9.75,,,3.0,,,6.0,,,,2.0,,3.25,

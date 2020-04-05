@@ -110,7 +110,6 @@ while True:
         player2Score += 1
         score.clear()
         score.write("Score board \n{} : {}\n{} : {}".format(player1,player1Score,player2,player2Score),align="left",font=("Arial",20,"normal"))
-        getReady()
 
     if ball.ycor() <= -300:
         winsound.PlaySound("fade.wav",winsound.SND_ASYNC)
@@ -120,7 +119,6 @@ while True:
         score.clear()
         player1Score += 1
         score.write("Score board \n{} : {}\n{} : {}".format(player1,player1Score,player2,player2Score),align="left",font=("Arial",20,"normal"))
-        getReady()
 
     if (ball.ycor() > 274 and ball.ycor() < 275) and (ball.xcor() < rectA.xcor() + 50 and ball.xcor() > rectA.xcor() - 50):
         winsound.PlaySound("bounce.wav",winsound.SND_ASYNC)
