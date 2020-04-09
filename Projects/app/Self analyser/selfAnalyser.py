@@ -188,13 +188,21 @@ if __name__ == "__main__":
             else:
                 if not pd.isna(dataframe['learning'].iloc[dataframe.shape[0]-1]):
                     loggedCategories['learning'] = dataframe['learning'].iloc[dataframe.shape[0]-1]
+                if not pd.isna(dataframe['work'].iloc[dataframe.shape[0]-1]):
+                    loggedCategories['work'] = dataframe['work'].iloc[dataframe.shape[0]-1]
             print(dataframe.tail())
 
-            if "learning" in loggedCategories:
+            if "learning" in loggedCategories or 'work' in loggedCategories:
+                learntInwork = 0.0
+                timeLoggedInLearning = 0.0
+                if 'work' in loggedCategories:
+                    learntInWork = float(input("Enter the amount of hours you learnt during work (Time logged in work - {} )- ".format(loggedCategories['work'])))
                 learningDf = pd.read_csv('tables/learning_time_sheet.csv')
+                if 'learning' in loggedCategories:
+                    timeLoggedInLearning = loggedCategories['learning']
+                totalTime = learntInWork + timeLoggedInLearning
                 techCategories = learningDf.columns
-                timeLogged = loggedCategories['learning']
-                loggedTechCategories = logLearningTimeSheet(techCategories,timeLogged)
+                loggedTechCategories = logLearningTimeSheet(techCategories,totalTime)
                 if bool(loggedTechCategories):
                     learningDf = learningDf.append(loggedTechCategories,ignore_index=True)
                     learningDf.to_csv("tables/learning_time_sheet.csv",index = False)
