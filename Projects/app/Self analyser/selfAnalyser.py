@@ -193,7 +193,7 @@ if __name__ == "__main__":
             print(dataframe.tail())
 
             if "learning" in loggedCategories or 'work' in loggedCategories:
-                learntInwork = 0.0
+                learntInWork = 0.0
                 timeLoggedInLearning = 0.0
                 if 'work' in loggedCategories:
                     learntInWork = float(input("Enter the amount of hours you learnt during work (Time logged in work - {} )- ".format(loggedCategories['work'])))
