@@ -1,0 +1,17 @@
+install conda
+
+install pycharm
+
+open cmd and type conda to check conda is installed
+
+then enter the following command to create an environment
+conda create -n tensor python=3.6
+
+activate tensor
+
+
+pip install tensorflow
+
+pip install keras
+
+configure pycharm to this environment

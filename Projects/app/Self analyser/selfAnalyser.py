@@ -232,17 +232,19 @@ if __name__ == "__main__":
 
         if userInput == 2:
             userChoice = input("""
-            1. Time spent on each day in particular category
+            1. Time spent on each day in particular category (bar)
             2. Time spent on last logged day in each category
+            3. See the trend of time spent on sleep,learning,social media and others on each day
             """)
             if userChoice == "1":
                 [print("{} {}".format(ind+1,val)) for ind,val in enumerate(categories[2:-1])]
                 select = int(input("Select the category!!"))
                 currentCategory = categories[select+1]
                 plt.bar(dataframe.date,dataframe[currentCategory])
+                plt.xticks(rotation=45)
                 plt.xlabel("date")
-                plt.ylabel("time spent on learing in hours")
-                plt.title("Time spent on learning each day")
+                plt.ylabel("time spent on {} in hours".format(currentCategory))
+                plt.title("Time spent on {} each day".format(currentCategory))
                 plt.show()
             elif userChoice == "2":
                 pieChart = dataframe.tail(1)
@@ -255,6 +257,17 @@ if __name__ == "__main__":
                 ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
                 plt.title(dataframe.date.iloc[dataframe.shape[0]-1])
                 plt.show()
+            elif userChoice == "3":
+                plt.plot(dataframe.date,dataframe['sleep'],color='yellow',label='sleep')
+                plt.plot(dataframe.date,dataframe['learning'],color='blue',label='learning')
+                plt.plot(dataframe.date, dataframe['social media'],color='red',label='social media')
+                plt.plot(dataframe.date, dataframe['others'],color='pink',label= 'others')
+                plt.xticks(rotation=45)
+                plt.xlabel("Date")
+                plt.ylabel("Trend of time spent on sleep,learning,social media and other")
+                plt.legend()
+                plt.show()
+
         if userInput == 3:
             print("See you soon.Byee!!")
             break
