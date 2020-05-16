@@ -191,6 +191,7 @@ if __name__ == "__main__":
                 if not pd.isna(dataframe['work'].iloc[dataframe.shape[0]-1]):
                     loggedCategories['work'] = dataframe['work'].iloc[dataframe.shape[0]-1]
             print(dataframe.tail())
+            loggedTechCategories = None
 
             if "learning" in loggedCategories or 'work' in loggedCategories:
                 learntInWork = 0.0
@@ -211,15 +212,16 @@ if __name__ == "__main__":
                         loggedTechCategories['python'] = learningDf['python'].iloc[learningDf.shape[0]-1]
                 print(learningDf.tail())
             
-            if "python" in loggedTechCategories:
-                pythonDf = pd.read_csv('tables/python_time_sheet.csv')
-                pyModules = pythonDf.columns
-                pyTimeLogged = loggedTechCategories['python']
-                loggedPyModules = logPyTimeSheet(pyModules, pyTimeLogged)
-                if bool(loggedPyModules):
-                    pythonDf = pythonDf.append(loggedPyModules,ignore_index=True)
-                    pythonDf.to_csv("tables/python_time_sheet.csv",index = False)
-                print(pythonDf.tail())
+            if loggedTechCategories is not None:
+                if "python" in loggedTechCategories:
+                    pythonDf = pd.read_csv('tables/python_time_sheet.csv')
+                    pyModules = pythonDf.columns
+                    pyTimeLogged = loggedTechCategories['python']
+                    loggedPyModules = logPyTimeSheet(pyModules, pyTimeLogged)
+                    if bool(loggedPyModules):
+                        pythonDf = pythonDf.append(loggedPyModules,ignore_index=True)
+                        pythonDf.to_csv("tables/python_time_sheet.csv",index = False)
+                    print(pythonDf.tail())
 
             mindsetDf = pd.read_csv('tables/mindset_analyser.csv')
             mindsetCategories = mindsetDf.columns
