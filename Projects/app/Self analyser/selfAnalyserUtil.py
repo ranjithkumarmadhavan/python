@@ -30,7 +30,7 @@ def getTimeDifferenceInhours(bedTime, wakeUpTime):
             if int(nightHour) == 12:
                  hours =  int(mrngHour) + (12 - int(nightHour))
         else:
-            hours = int(mrngHour) - int(nightHour) + 1
+            hours = int(mrngHour) - int(nightHour) - 1
             if int(nightHour) == 12:
                  hours =  int(mrngHour) + (12 - int(nightHour)) - 1
     if minutes != 60:
