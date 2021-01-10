@@ -28,8 +28,6 @@ def analyseMindSet(categories):
     except Exception as e:
         print(e)
     
-
-
 def logPyTimeSheet(pyModules, pyTimeLogged):
     try:
         loggedTime = 0.0
@@ -230,7 +228,6 @@ if __name__ == "__main__":
                 mindsetDf = mindsetDf.append(ratedCategories,ignore_index=True)
                 mindsetDf.to_csv("tables/mindset_analyser.csv",index = False)
             print(mindsetDf.tail())
-
 
         if userInput == 2:
             userChoice = input("""
