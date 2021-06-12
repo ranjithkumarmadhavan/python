@@ -1,24 +1,24 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
-path = 'C:\Program Files (x86)\chromedriver.exe'
+path = 'C:\chromedriver.exe' # whichever directory your chromedriver.exe is saved
 
 driver = webdriver.Chrome(path)
-driver.get('https://web.whatsapp.com/')
+driver.get('https://web.whatsapp.com/') # whatsapp web url
 
-name = input('Enter the name of user or group: ')
+name = input('Enter the exact name of user or group: ') 
 msg = input('Enter your message : ')
 count = int(input("Enter the count: "))
 
 input("Enter anything after scanning QR code")
 
-user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
+user = driver.find_element_by_css_selector('span[title = "{}"]'.format(name))
 
 user.click()
 
-msg_box = driver.find_element_by_class_name('_3F6QL._2WovP') #_3F6QL._2WovP
+msg_box = driver.find_element_by_xpath("/html/body/div/div[1]/div[1]/div[4]/div[1]/footer/div[1]/div[2]/div/div[2]") #to get element path in developer tools, select element=> right click => copy with path.
+
 
 for i in range(count):
-    print(i)
     msg_box.send_keys(msg)
-    button = driver.find_element_by_class_name('_35EW6')
-    button.click()
+    msg_box.send_keys(Keys.RETURN)
